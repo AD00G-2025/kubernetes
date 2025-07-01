@@ -2,29 +2,20 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: postgres-exporter-monitor
-  namespace: database # This MUST be the namespace where your postgres-postgresql-metrics service is running
+  namespace: database
   labels:
-    # IMPORTANT: These labels tell the Prometheus Operator which ServiceMonitors to manage.
-    # Based on your output, your Prometheus Helm release instance is likely 'prometheus'.
-    # If your 'kube-prometheus-stack' was installed with a different release name,
-    # adjust this label accordingly (e.g., 'release: my-monitoring').
-    # If you're unsure, run `helm list -A` and look for the release name of your
-    # monitoring stack. Common default is 'kube-prometheus-stack'.
-    release: prometheus-stack # This is a very common default for kube-prometheus-stack
+    release: prometheus-stack
 spec:
   selector:
     matchLabels:
-      # These labels must EXACTLY match the labels on your 'postgres-postgresql-metrics' Service.
-      # Refer to the output of `kubectl get svc postgres-postgresql-metrics -n database -o yaml`
-      # I'm using common labels for Bitnami Postgres charts here. Adjust if yours are different.
-      app.kubernetes.io/instance: postgres # Replace with actual label from your service
-      app.kubernetes.io/name: postgresql # Replace with actual label from your service
+      app.kubernetes.io/component: metrics
+      app.kubernetes.io/instance: postgres
+      app.kubernetes.io/name: postgresql
   endpoints:
-    - port: metrics # This refers to the 'name' of the port in your Service (which is 9187/TCP)
-      interval: 30s # How often Prometheus should scrape these metrics
-      # The postgres_exporter typically serves HTTP on /metrics, so these are good defaults:
+    - port: http-metrics
+      interval: 30s
       path: /metrics
       scheme: http
   namespaceSelector:
     matchNames:
-      - database # Only scrape services within the 'database' namespace
+      - database
