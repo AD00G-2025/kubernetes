@@ -4,9 +4,9 @@ metadata:
   name: server-config
   namespace: todo-app
 data:
-  DB_HOST: postgres-service
+  DB_HOST: postgres-postgresql.database.svc.cluster.local
   DB_PORT: "5432"
-  DB_NAME: public
+  DB_NAME: postgres
   DB_USER: postgres
   PORT: "3001"
   NODE_ENV: production
