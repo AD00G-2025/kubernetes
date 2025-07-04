@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: server-exporter-monitor
+  namespace: todo-app
+  labels:
+    release: prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: todo-server
+  endpoints:
+    - port: http-metrics
+      interval: 30s
+      path: /metrics
+      scheme: http
+  namespaceSelector:
+    matchNames:
+      - todo-app
