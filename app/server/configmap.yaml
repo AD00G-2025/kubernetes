@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: server-config
+  namespace: todo-app
+data:
+  DB_HOST: postgres-service
+  DB_PORT: "5432"
+  DB_NAME: public
+  DB_USER: postgres
+  PORT: "3001"
+  NODE_ENV: production
+  CORS_ORIGIN: "*"
