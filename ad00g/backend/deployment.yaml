@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: andrewutfpr/backend-ad00g:1.0
+          image: andrewutfpr/backend-ad00g:1.1
           ports:
             - containerPort: 8080
           env:
