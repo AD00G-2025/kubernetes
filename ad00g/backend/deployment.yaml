@@ -36,13 +36,6 @@ spec:
                 secretKeyRef:
                   name: postgres-postgresql
                   key: POSTGRES_PASSWORD
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "50m"
-            limits:
-              memory: "128Mi"
-              cpu: "100m"
           livenessProbe:
             httpGet:
               path: /actuator/health
