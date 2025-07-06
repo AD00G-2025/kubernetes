@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: ad00g-server-exporter-monitor
+  namespace: ad00g
+  labels:
+    release: prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: ad00g-backend
+  endpoints:
+    - port: http
+      interval: 30s
+      path: /actuator/metrics
+      scheme: http
+  namespaceSelector:
+    matchNames:
+      - ad00g
