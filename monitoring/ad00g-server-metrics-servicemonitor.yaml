@@ -12,7 +12,7 @@ spec:
   endpoints:
     - port: http
       interval: 30s
-      path: /actuator/metrics
+      path: /actuator/prometheus
       scheme: http
   namespaceSelector:
     matchNames:
