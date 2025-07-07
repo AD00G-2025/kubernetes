@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: andrewutfpr/frontend-ad00g:1.1
+          image: andrewutfpr/frontend-ad00g:1.2
           ports:
             - containerPort: 80
           env:
