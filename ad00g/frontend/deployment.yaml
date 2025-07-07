@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ad00g-frontend-deployment
+  namespace: ad00g
+  labels:
+    app: ad00g-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ad00g-frontend
+  template:
+    metadata:
+      labels:
+        app: ad00g-frontend
+    spec:
+      containers:
+        - name: web
+          image: andrewutfpr/frontend-ad00g:1.0
+          ports:
+            - containerPort: 80
+          env:
+            - name: VITE_API_URL
+              value: http://10.20.50.220:80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+      restartPolicy: Always

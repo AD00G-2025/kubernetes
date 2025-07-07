@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ad00g-frontend-service
+  namespace: ad00g
+  labels:
+    app: ad00g-frontend
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
+  selector:
+    app: ad00g-frontend
+  sessionAffinity: None
