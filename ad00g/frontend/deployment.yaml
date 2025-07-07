@@ -17,12 +17,9 @@ spec:
     spec:
       containers:
         - name: web
-          image: andrewutfpr/frontend-ad00g:1.2
+          image: robersonandrade/ad00g-frontend:1.0
           ports:
             - containerPort: 80
-          env:
-            - name: VITE_API_URL
-              value: http://10.20.50.220:80
           resources:
             requests:
               memory: "64Mi"
